@@ -2,14 +2,14 @@ package datastructure;
 
 import java.util.Arrays;
 
-public class Sort0509 {
+public class Sort0508 {
     //Binsearch non-recursion
     public static int halfSort1(int r[], int left, int right, int key) {
         int center = -1;
-        while (left < right) {
+        while (left <= right) {
             center = (left + right) / 2;
-            if (r[center] < key) left = center + 1;
-            else if (r[center] > key) right = center - 1;
+            if (key > r[center]) left = center + 1;
+            else if (key < r[center]) right = center - 1;
             else return center;
         }
         return center;
@@ -18,9 +18,11 @@ public class Sort0509 {
     //Binsearch recursion
     public static int halfSort2(int r[], int left, int right, int key) {
         int center = -1;
+        if (left > right)
+            return center;
         center = (left + right) / 2;
-        if (r[center] < key) return halfSort2(r, center + 1, right, key);
-        else if (r[center] > key) return halfSort2(r, left, center - 1, key);
+        if (key > r[center]) return halfSort2(r, center + 1, right, key);
+        else if (key < r[center]) return halfSort2(r, left, center - 1, key);
         return center;
     }
 
@@ -40,7 +42,6 @@ public class Sort0509 {
 
         for (int d = n / 2; d >= 1; d = d / 2) {
 
-
             for (int i = d; i <= n - 1; i++) {
                 int temp = r[i];
                 int j = i - d;
@@ -48,7 +49,6 @@ public class Sort0509 {
                     r[j + d] = r[j];
                 r[j + d] = temp;
             }
-
 
         }
 
@@ -68,94 +68,39 @@ public class Sort0509 {
     }
 
     //Quicksort
-    public static void quick(int r[], int left, int right) {
+    public static void quick(int r[], int left,int right) {
         int i=left;
         int j=right;
-        if (left>right)
+        if (i>j)
             return;
         int base=r[i];
         while (i<j){
-            while (i<j&&base<r[j])j--;
-            if (i<j&&base>r[j]){
-                r[i]=r[j]^r[i];
-                r[j]=r[j]^r[i];
-                r[i]=r[j]^r[i];
+            while (i<j&&base<=r[j])j--;
+            if (base>r[j]){
+                r[i]=r[i]^r[j];
+                r[j]=r[i]^r[j];
+                r[i]=r[i]^r[j];
             }
-            while (i<j&&base>r[i])i++;
-            if (i<j&&base<r[i]){
-                r[i]=r[j]^r[i];
-                r[j]=r[j]^r[i];
-                r[i]=r[j]^r[i];
+            while (i<j&&r[i]<=base)i++;
+            if (base<r[i]){
+                r[i]=r[i]^r[j];
+                r[j]=r[i]^r[j];
+                r[i]=r[i]^r[j];
             }
         }
         quick(r,i+1,right);
         quick(r,left,i-1);
     }
 
-//    //Selection Sort
-//    public static void select(int r[], int n) {
-//         for (int i=0;i<=n-1;i++){
-//             int minIndex=i;
-//             for (int j=i+1;j<=n-1;j++){
-//                 if (r[minIndex]>r[j])
-//                     minIndex=j;
-//             }
-//             if (minIndex!=i){
-//                 r[i]=r[i]^r[minIndex];
-//                 r[minIndex]=r[i]^r[minIndex];
-//                 r[i]=r[i]^r[minIndex];
-//             }
-//         }
-//    }
-//
-//    //Heap Sort
-//    public static void heap(int r[], int n) {
-//        for (int i=n/2-1;i>=0;i--){
-//            heap_x(r,i,n);
-//        }
-//        for (int i=0;i<=n-2;i++){
-//            r[0]=r[0]^r[n-1-i];
-//            r[n-1-i]=r[0]^r[n-1-i];
-//            r[0]=r[0]^r[n-1-i];
-//            System.out.println(i+"#"+Arrays.toString(r));
-//            heap_x(r,0,n-1-i);
-//        }
-//    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     //Selection Sort
     public static void select(int r[], int n) {
         for (int i=0;i<=n-1;i++){
             int minIndex=i;
-            for (int j=i+1;j<=n-1;j++){
-                if (r[minIndex]>r[j])
+            for (int j=i;j<=n-1;j++){
+                if (r[minIndex]>r[j]){
                     minIndex=j;
+                }
             }
             if (minIndex!=i){
                 r[i]=r[i]^r[minIndex];
@@ -168,22 +113,24 @@ public class Sort0509 {
     //Heap Sort
     public static void heap(int r[], int n) {
         for (int i=n/2-1;i>=0;i--){
-            heap_x(r,i,n);
+            heap_x(r,i,n-1);
         }
+        System.out.println("初建堆" + Arrays.toString(r));
         for (int i=0;i<=n-2;i++){
-            r[0]=r[0]^r[n-i-1];
-            r[n-i-1]=r[0]^r[n-i-1];
-            r[0]=r[0]^r[n-i-1];
-            heap_x(r,0,n-1-i);
+            r[0]=r[0]^r[n-1-i];
+            r[n-1-i]=r[0]^r[n-1-i];
+            r[0]=r[0]^r[n-1-i];
+            System.out.println("重建堆" +i+":"+ Arrays.toString(r));
+            heap_x(r,0,n-2-i);
         }
     }
 
     public static void heap_x(int r[], int start, int end) {
         int i=start;
         int j=2*i+1;
-        while (j<=end-1){
-            if (j<end-1&&r[j]<r[j+1])j++;
-            else if (r[i]>=r[j])break;
+        while (j<=end){
+            if (j<end&&r[j]<r[j+1])j++;
+            if (r[i]>r[j])break;
             else {
                 r[i]=r[i]^r[j];
                 r[j]=r[i]^r[j];
@@ -194,25 +141,25 @@ public class Sort0509 {
         }
     }
 
+
+
+
     public static void main(String[] args) {
         int r[] = {1, 3, 4, 5, 6, 7, 9, 10, 14, 16};
         int n = r.length;
-
-
-//        int index1 = halfSort1(r, 0, n - 1, 10);
-//        int index2 = halfSort2(r, 0, n - 1, 10);
-//        System.out.println("index:" + index1 + "#index2:" + index2);
-        //        r = new int[]{1, 3, 4, 5, 6, 7, 9, 10, 14, 16, 14, 16, 14, 16};
-//        r = new int[]{4, 5, 1, 2, 3,3};
-//        r = new int[]{10, 14, 16, 14, 16, 14, 16,1, 3, 4, 5, 6, 7, 9};
-        r = new int[]{10, 14, 16, 14, 16, 14, 16,1, 3, 4,5};
+//        int index1=halfSort1(r,0,n-1,10);
+//        int index2=halfSort2(r,0,n-1,10);
+//        System.out.println("index:"+index1+"#index2:"+index2);
+//        r = new int[]{1, 3, 4, 5, 6, 7, 9, 10, 14, 16, 14, 16, 14, 16};
+        r = new int[]{1, 3, 4, 5, 6};
         n = r.length;
-//        insert(r, n);
-//        shell(r, n);
-//        bubble(r, n);
-//        quick(r, 0, n - 1);
-//        select(r, n);
-        heap(r, n);
+//        insert(r, n );
+//        shell(r,n);
+//        bubble(r,n);
+//        quick(r,0,n-1);
+//        select(r,n);
+        heap(r,n);
         System.out.println(Arrays.toString(r));
+
     }
 }
