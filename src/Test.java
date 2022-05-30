@@ -23,9 +23,13 @@ public class Test {
 //         String ss=new StringBuilder().append(tt1).append(tt2).toString();
 //        String tt4=new String("5555");
 
-        String a = "abc";
-        String b = "abc";
-        boolean ss=(a==b);
+//        String a = "abc";
+//        String b = new String("abc");
+//        if (a==b){
+//            System.out.println(a);
+//        }
+        int r[]=new int[11];
+        r[0]=4;
     }
 
     public void x1(String t1,String t2) {

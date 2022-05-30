@@ -1,10 +1,9 @@
-package datastructure;
+package datastructure.his;
 
-import sun.font.CreatedFontTracker;
+import Bean.ArcNode;
+import Bean.VertexNode;
 
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
 
 public class Sort0507 {
     //折半查找非递归
@@ -148,5 +147,108 @@ public class Sort0507 {
 //        select(r,n);
         heap(r,n);
         System.out.println(Arrays.toString(r));
+    }
+
+    public static class ALGraph0529 {
+        boolean []visited;
+        VertexNode[]adjlist;
+        int vertexNum;
+        int arcNum;
+
+
+
+        /**
+         * @param vertexArray 顶点信息数组
+         * @param arcArray 边原始数组（格式，初度顶点编号#入度顶点编号）
+         */
+        public ALGraph0529(VertexNode[] vertexArray, String[] arcArray) {
+            this.vertexNum=vertexArray.length;
+            this.arcNum=arcArray.length;
+            adjlist=new VertexNode[vertexNum];
+            visited=new boolean[vertexNum];
+            for (int i=0;i<=vertexNum-1;i++){
+                adjlist[i]=vertexArray[i];
+                visited[i]=false;
+            }
+
+            for (int i=0;i<=arcNum-1;i++){
+                String arcs=arcArray[i];
+                if (arcs==null||"".equals(arcs))
+                    continue;
+                String[]a=arcs.split("#");
+                int v0=Integer.valueOf(a[0]);
+                int v1=Integer.valueOf(a[1]);
+                ArcNode arcNode=adjlist[v0].firstedge;
+                if (arcNode==null)
+                    adjlist[v0].firstedge=new ArcNode(v1);
+                while (arcNode!=null){
+                    if (arcNode.next==null){
+                        arcNode.next=new ArcNode(v1);
+                        break;
+                    }
+                    arcNode=arcNode.next;
+                }
+            }
+
+
+
+        }
+    //        System.out.println("访问:"+adjlist[v].vertex);
+
+        public void DFSTraverse(int v){
+            System.out.println("访问:"+adjlist[v].vertex);
+            visited[v]=true;
+            ArcNode arcNode=adjlist[v].firstedge;
+            while (arcNode!=null){
+                int adjverx=arcNode.adjvex;
+                if (!visited[adjverx]){
+                    DFSTraverse(adjverx);
+                }
+                arcNode=arcNode.next;
+            }
+        }
+
+        public void BFSTraverse(int v){
+            int front=-1,rear=-1;
+            int []Q=new int[vertexNum];
+            System.out.println("访问:"+adjlist[v].vertex);
+            visited[v]=true;
+            Q[++rear]=v;
+            while (rear!=front){
+                v=Q[++front];
+                ArcNode arcNode=adjlist[v].firstedge;
+                while (arcNode!=null){
+                    int adjverx=arcNode.adjvex;
+                    if (!visited[adjverx]){
+                        System.out.println("访问:"+adjlist[adjverx].vertex);
+                        visited[adjverx]=true;
+                        Q[++rear]=adjverx;
+                    }
+                    arcNode=arcNode.next;
+                }
+            }
+
+        }
+
+
+        public static void main(String[] args) {
+            VertexNode[]vertexNodes=new VertexNode[4];
+            vertexNodes[0]=new VertexNode("顶点0");
+            vertexNodes[1]=new VertexNode("顶点1");
+            vertexNodes[2]=new VertexNode("顶点2");
+            vertexNodes[3]=new VertexNode("顶点3");
+            String[] arcArray=new String[8];
+            arcArray[0]="0#1";
+            arcArray[1]="0#3";
+            arcArray[2]="1#0";
+            arcArray[3]="1#2";
+            arcArray[4]="1#3";
+            arcArray[5]="2#1";
+            arcArray[6]="3#0";
+            arcArray[7]="3#1";
+            ALGraph0529 graph=new ALGraph0529(vertexNodes,arcArray);
+    //        graph.DFSTraverse(0);
+            graph.BFSTraverse(0);
+        }
     }
 }

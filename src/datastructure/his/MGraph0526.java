@@ -1,14 +1,14 @@
-package datastructure;
+package datastructure.his;
 
 import Bean.Entry;
 
-public class MGraph {
+public class MGraph0526 {
     private Entry[] vertex;//顶点
     private int[][] arc;//邻接矩阵（弧）
     private int vNum;
     private boolean[] visited;
 
-    public MGraph(){
+    public MGraph0526(){
         this(new Entry[]{new Entry("顶点0"),new Entry("顶点1"),new Entry("顶点2"),new Entry("顶点3"),new Entry("顶点4")}, new String[]{"0#1","0#3","1#2","1#3","2#4"});
     }
 
@@ -18,7 +18,7 @@ public class MGraph {
      * @param arcArray 边原始数组（格式，初度顶点编号#入度顶点编号）
      * @param arcNum 边数量
      */
-    public MGraph(Entry[] vertexArray,  String[] arcArray) {
+    public MGraph0526(Entry[] vertexArray, String[] arcArray) {
         int vertexNum=vertexArray.length;
         int arcNum=arcArray.length;
         vertex = new Entry[vertexNum];
@@ -46,6 +46,11 @@ public class MGraph {
         }
     }
 
+    /**
+     * Deepth First Traverse
+     * @param v
+     * System.out.println("访问:"+vertex[v].text);
+     */
     public void DFSTraverse(int v){
         System.out.println("访问:"+vertex[v].text);
         visited[v]=true;
@@ -54,6 +59,12 @@ public class MGraph {
                 DFSTraverse(i);
         }
     }
+
+    /**
+     * Breath First Traverse
+     * @param v
+     * System.out.println("访问:"+vertex[v].text);
+     */
     public void BFSTraverve(int v){
         int front=-1,rear=-1;
         int[] Q=new int[vNum];
@@ -91,7 +102,7 @@ public class MGraph {
         arcArray[2]="1#2";
         arcArray[3]="1#3";
         arcArray[4]="2#4";
-        MGraph graph=new MGraph(entries,arcArray);
+        MGraph0526 graph=new MGraph0526(entries,arcArray);
 //        graph.DFSTraverse(0);
         graph.BFSTraverve(0);
     }

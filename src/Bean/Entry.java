@@ -1,8 +1,8 @@
-package datastructure;
+package Bean;
 
 public class Entry {
     public String text="";
-    Entry(String text){
+    public Entry(String text){
         this.text=text;
     };
 }

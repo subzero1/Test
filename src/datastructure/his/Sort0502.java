@@ -1,4 +1,4 @@
-package datastructure;
+package datastructure.his;
 
 public class Sort0502 {
     //折半查找非递归
