@@ -59,6 +59,7 @@ public class S0525 {
                 }
             }
         }
+    }
 
         //Quicksort
         public static void quick ( int r[], int left, int right){
@@ -155,12 +156,12 @@ public class S0525 {
             System.out.println("Before Sorting:" + Arrays.toString(r));
 //                insert(r, n );
 //                shell(r,n);
-            bubble(r, n);
-            //        quick(r,0,n-1);
-            //        select(r,n);
+//            bubble(r, n);
+//                    quick(r,0,n-1);
+//                    select(r,n);
 //        heap(r, n);
-//        int s[]=mSort(r,0,n-1);
-//        System.out.println(Arrays.toString(s));
-            System.out.println("After Sorting:" + Arrays.toString(r));
+        int s[]=mSort(r,0,n-1);
+        System.out.println(Arrays.toString(s));
+//            System.out.println("After Sorting:" + Arrays.toString(r));
         }
     }
