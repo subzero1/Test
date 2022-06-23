@@ -1,24 +1,24 @@
 package datastructure.xbackup;
 
 import Bean.VertexNode;
-import Bean.VertexNode;
 
-public class MGraph0609 {
+public class MGraph0623 {
     private VertexNode[] vertex;//顶点
     private int[][] arc;//邻接矩阵（弧）
+
     private int vertexNum;
     private int arcNum;
     private boolean[] visited;
 
-    public MGraph0609(){
-        this(new VertexNode[]{new VertexNode("顶点0"),new VertexNode("顶点1"),new VertexNode("顶点2"),new VertexNode("顶点3"),new VertexNode("顶点4")}, new String[]{"0#1","0#3","1#2","1#3","2#4"});
-    }
+//    public MGraph(){
+//        this(new VertexNode[]{new VertexNode("顶点0"),new VertexNode("顶点1"),new VertexNode("顶点2"),new VertexNode("顶点3"),new VertexNode("顶点4")}, new String[]{"0#1","0#3","1#2","1#3","2#4"});
+//    }
 
     /**
      * @param vertexArray 顶点信息数组
      * @param arcArray 边原始数组（格式，初度顶点编号#入度顶点编号）
      */
-    public MGraph0609(VertexNode[] vertexArray, String[] arcArray) {
+    public MGraph0623(VertexNode[] vertexArray, String[] arcArray) {
         this.arcNum=arcArray.length;
         this.vertexNum=vertexArray.length;
 
@@ -49,7 +49,7 @@ public class MGraph0609 {
     /**
      * Deepth First Traverse
      * @param v
-    System.out.println("访问:"+vertex[v].text);
+    System.out.println("访问:"+vertex[v].vertex);
     visited[v]=true;
      */
     public void DFSTraverse(int v){
@@ -63,14 +63,14 @@ public class MGraph0609 {
     /**
      * Breath First Traverse
      * @param v
-    System.out.println("访问:"+vertex[v].text);
+    System.out.println("访问:"+vertex[v].vertex);
     visited[v]=true;
      */
     public void BFSTraverve(int v){
+        int front=-1,rear=-1;
+        int []Q=new int[vertexNum];
         System.out.println("访问:"+vertex[v].vertex);
         visited[v]=true;
-        int front=-1,rear=-1;
-        int[]Q=new int[vertexNum];
         Q[++rear]=v;
         while (front!=rear){
             v=Q[++front];
@@ -105,7 +105,7 @@ public class MGraph0609 {
         arcArray[2]="1#2";
         arcArray[3]="1#3";
         arcArray[4]="2#4";
-        MGraph0609 graph=new MGraph0609(entries,arcArray);
+        MGraph0623 graph=new MGraph0623(entries,arcArray);
 //        graph.DFSTraverse(0);
         graph.BFSTraverve(0);
     }
