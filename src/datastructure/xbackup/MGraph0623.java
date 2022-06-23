@@ -61,6 +61,37 @@ public class MGraph0623 {
     }
 
     /**
+     * Deepth First Traverse Noe
+     * @param v
+    System.out.println("访问:"+vertex[v].vertex);
+    visited[v]=true;
+     */
+    public void DFSTraverse1(int v){
+        int []stack=new int[vertexNum];
+        for (int i=0;i<=vertexNum-1;i++)
+            stack[i]=-1;
+        int top=-1;
+        System.out.println("访问:"+vertex[v].vertex);
+        visited[v]=true;
+        stack[++top]=v;
+        while (top!=-1){
+            v=stack[top];
+            int i=0;
+            for (i=0;i<=vertexNum-1;i++){
+                if (arc[v][i]==1&&!visited[i]){
+                    System.out.println("访问:"+vertex[i].vertex);
+                    visited[i]=true;
+                    stack[++top]=i;
+                    break;
+                }
+            }
+            if(i==vertexNum){
+                top--;
+            }
+        }
+    }
+
+    /**
      * Breath First Traverse
      * @param v
     System.out.println("访问:"+vertex[v].vertex);
@@ -106,7 +137,7 @@ public class MGraph0623 {
         arcArray[3]="1#3";
         arcArray[4]="2#4";
         MGraph0623 graph=new MGraph0623(entries,arcArray);
-//        graph.DFSTraverse(0);
-        graph.BFSTraverve(0);
+        graph.DFSTraverse1(0);
+//        graph.BFSTraverve(0);
     }
 }

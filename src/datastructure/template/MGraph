@@ -56,6 +56,16 @@ public class MGraph {
 
     }
 
+        /**
+         * Deepth First Traverse Noe
+         * @param v
+        System.out.println("访问:"+vertex[v].vertex);
+        visited[v]=true;
+         */
+        public void DFSTraverse1(int v){
+        }
+        }
+
     /**
      * Breath First Traverse
      * @param v
@@ -89,6 +99,7 @@ public class MGraph {
         arcArray[4]="2#4";
         MGraph graph=new MGraph(entries,arcArray);
         graph.DFSTraverse(0);
+//        graph.DFSTraverse1(0);
 //        graph.BFSTraverve(0);
     }
 }
