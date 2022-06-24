@@ -4,13 +4,13 @@ package Bean;
  *
  */
 public class VertexNode {
-    public String vertex;
+    public String text;
 
     //邻接表专用字段，邻接矩阵不需要此字段
-    public ArcNode firstedge;
+    public ArcNode firstArcNode;
 
     public VertexNode(String vertex) {
-        this.vertex=vertex;
-        this.firstedge=null;
+        this.text =vertex;
+        this.firstArcNode =null;
     }
 }

@@ -178,9 +178,9 @@ public class Sort0507 {
                 String[]a=arcs.split("#");
                 int v0=Integer.valueOf(a[0]);
                 int v1=Integer.valueOf(a[1]);
-                ArcNode arcNode=adjlist[v0].firstedge;
+                ArcNode arcNode=adjlist[v0].firstArcNode;
                 if (arcNode==null)
-                    adjlist[v0].firstedge=new ArcNode(v1);
+                    adjlist[v0].firstArcNode =new ArcNode(v1);
                 while (arcNode!=null){
                     if (arcNode.next==null){
                         arcNode.next=new ArcNode(v1);
@@ -196,9 +196,9 @@ public class Sort0507 {
     //        System.out.println("访问:"+adjlist[v].vertex);
 
         public void DFSTraverse(int v){
-            System.out.println("访问:"+adjlist[v].vertex);
+            System.out.println("访问:"+adjlist[v].text);
             visited[v]=true;
-            ArcNode arcNode=adjlist[v].firstedge;
+            ArcNode arcNode=adjlist[v].firstArcNode;
             while (arcNode!=null){
                 int adjverx=arcNode.adjvex;
                 if (!visited[adjverx]){
@@ -211,16 +211,16 @@ public class Sort0507 {
         public void BFSTraverse(int v){
             int front=-1,rear=-1;
             int []Q=new int[vertexNum];
-            System.out.println("访问:"+adjlist[v].vertex);
+            System.out.println("访问:"+adjlist[v].text);
             visited[v]=true;
             Q[++rear]=v;
             while (rear!=front){
                 v=Q[++front];
-                ArcNode arcNode=adjlist[v].firstedge;
+                ArcNode arcNode=adjlist[v].firstArcNode;
                 while (arcNode!=null){
                     int adjverx=arcNode.adjvex;
                     if (!visited[adjverx]){
-                        System.out.println("访问:"+adjlist[adjverx].vertex);
+                        System.out.println("访问:"+adjlist[adjverx].text);
                         visited[adjverx]=true;
                         Q[++rear]=adjverx;
                     }

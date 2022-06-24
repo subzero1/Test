@@ -53,7 +53,7 @@ public class MGraph0623 {
     visited[v]=true;
      */
     public void DFSTraverse(int v){
-        System.out.println("访问:"+vertex[v].vertex);
+        System.out.println("访问:"+vertex[v].text);
         visited[v]=true;
         for (int i=0;i<=vertexNum-1;i++)
             if (arc[v][i]==1&&!visited[i])
@@ -71,7 +71,7 @@ public class MGraph0623 {
         for (int i=0;i<=vertexNum-1;i++)
             stack[i]=-1;
         int top=-1;
-        System.out.println("访问:"+vertex[v].vertex);
+        System.out.println("访问:"+vertex[v].text);
         visited[v]=true;
         stack[++top]=v;
         while (top!=-1){
@@ -79,7 +79,7 @@ public class MGraph0623 {
             int i=0;
             for (i=0;i<=vertexNum-1;i++){
                 if (arc[v][i]==1&&!visited[i]){
-                    System.out.println("访问:"+vertex[i].vertex);
+                    System.out.println("访问:"+vertex[i].text);
                     visited[i]=true;
                     stack[++top]=i;
                     break;
@@ -100,14 +100,14 @@ public class MGraph0623 {
     public void BFSTraverve(int v){
         int front=-1,rear=-1;
         int []Q=new int[vertexNum];
-        System.out.println("访问:"+vertex[v].vertex);
+        System.out.println("访问:"+vertex[v].text);
         visited[v]=true;
         Q[++rear]=v;
         while (front!=rear){
             v=Q[++front];
             for (int i=0;i<=vertexNum-1;i++){
                 if (arc[v][i]==1&&!visited[i]){
-                    System.out.println("访问:"+vertex[i].vertex);
+                    System.out.println("访问:"+vertex[i].text);
                     visited[i]=true;
                     Q[++rear]=i;
                 }

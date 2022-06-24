@@ -1,7 +1,6 @@
 package datastructure.xbackup;
 
 import Bean.VertexNode;
-import Bean.VertexNode;
 
 public class MGraph0609 {
     private VertexNode[] vertex;//顶点
@@ -53,7 +52,7 @@ public class MGraph0609 {
     visited[v]=true;
      */
     public void DFSTraverse(int v){
-        System.out.println("访问:"+vertex[v].vertex);
+        System.out.println("访问:"+vertex[v].text);
         visited[v]=true;
         for (int i=0;i<=vertexNum-1;i++)
             if (arc[v][i]==1&&!visited[i])
@@ -67,7 +66,7 @@ public class MGraph0609 {
     visited[v]=true;
      */
     public void BFSTraverve(int v){
-        System.out.println("访问:"+vertex[v].vertex);
+        System.out.println("访问:"+vertex[v].text);
         visited[v]=true;
         int front=-1,rear=-1;
         int[]Q=new int[vertexNum];
@@ -76,7 +75,7 @@ public class MGraph0609 {
             v=Q[++front];
             for (int i=0;i<=vertexNum-1;i++){
                 if (arc[v][i]==1&&!visited[i]){
-                    System.out.println("访问:"+vertex[i].vertex);
+                    System.out.println("访问:"+vertex[i].text);
                     visited[i]=true;
                     Q[++rear]=i;
                 }

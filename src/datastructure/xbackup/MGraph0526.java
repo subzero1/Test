@@ -50,7 +50,7 @@ public class MGraph0526 {
      * System.out.println("访问:"+vertex[v].vertex);
      */
     public void DFSTraverse(int v){
-        System.out.println("访问:"+vertex[v].vertex);
+        System.out.println("访问:"+vertex[v].text);
         visited[v]=true;
         for (int i=0;i<=vNum-1;i++){
             if (arc[v][i]==1&&!visited[i])
@@ -68,14 +68,14 @@ public class MGraph0526 {
         int[] Q=new int[vNum];
         for (int i=0;i<=vNum-1;i++)
             Q[i]=-1;
-        System.out.println("访问顶点:"+vertex[v].vertex);
+        System.out.println("访问顶点:"+vertex[v].text);
         visited[v]=true;
         Q[++rear]=v;
         while (front!=rear){
             v=Q[++front];
             for (int j=0;j<=vNum-1;j++){
                 if (arc[v][j]==1&&!visited[j]){
-                    System.out.println("访问顶点:"+vertex[j].vertex);
+                    System.out.println("访问顶点:"+vertex[j].text);
                     visited[j]=true;
                     Q[++rear]=j;
                 }

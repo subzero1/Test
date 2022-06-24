@@ -201,9 +201,9 @@ public class S0524 {
                 String[]a=arcs.split("#");
                 int v0=Integer.valueOf(a[0]);
                 int v1=Integer.valueOf(a[1]);
-                 ArcNode arcNode=adjlist[v0].firstedge;
+                 ArcNode arcNode=adjlist[v0].firstArcNode;
                  if (arcNode==null)
-                     adjlist[v0].firstedge=new ArcNode(v1);
+                     adjlist[v0].firstArcNode =new ArcNode(v1);
                 while (arcNode!=null){
                     if (arcNode.next==null){
                         arcNode.next=new ArcNode(v1);
@@ -218,9 +218,9 @@ public class S0524 {
         }
 
         public void DFSTraverse(int v){
-            System.out.println("访问:"+adjlist[v].vertex);
+            System.out.println("访问:"+adjlist[v].text);
             visited[v]=true;
-            ArcNode arcNode=adjlist[v].firstedge;
+            ArcNode arcNode=adjlist[v].firstArcNode;
             while (arcNode!=null){
                 int j=arcNode.adjvex;
                 if (!visited[j])
@@ -235,16 +235,16 @@ public class S0524 {
            for (int i=0;i<=vertexNum-1;i++){
                Q[i]=-1;
            }
-            System.out.println("访问:"+adjlist[v].vertex);
+            System.out.println("访问:"+adjlist[v].text);
             visited[v]=true;
             Q[++rear]=v;
             while (front!=rear){
                 v=Q[++front];
-                ArcNode arcNode=adjlist[v].firstedge;
+                ArcNode arcNode=adjlist[v].firstArcNode;
                 while (arcNode!=null){
                     int j=arcNode.adjvex;
                     if (!visited[j]){
-                        System.out.println("访问:"+adjlist[j].vertex);
+                        System.out.println("访问:"+adjlist[j].text);
                         visited[j]=true;
                         Q[++rear]=j;
                     }

@@ -32,9 +32,9 @@ public class ALGraph0608 {
             String[]a=arcs.split("#");
             int v0=Integer.valueOf(a[0]);
             int v1=Integer.valueOf(a[1]);
-            ArcNode arcNode=adjlist[v0].firstedge;
+            ArcNode arcNode=adjlist[v0].firstArcNode;
             if (arcNode==null)
-                adjlist[v0].firstedge=new ArcNode(v1);
+                adjlist[v0].firstArcNode =new ArcNode(v1);
             while (arcNode!=null){
                 if (arcNode.next==null){
                     arcNode.next=new ArcNode(v1);
@@ -56,9 +56,9 @@ public class ALGraph0608 {
      * @param v
      */
     public void DFSTraverse(int v){
-        System.out.println("访问:"+adjlist[v].vertex);
+        System.out.println("访问:"+adjlist[v].text);
         visited[v]=true;
-        ArcNode pNode=adjlist[v].firstedge;
+        ArcNode pNode=adjlist[v].firstArcNode;
         while (pNode!=null){
             int adjvex=pNode.adjvex;
             if (!visited[adjvex])
@@ -74,18 +74,18 @@ public class ALGraph0608 {
      * @param v
      */
     public void BFSTraverse(int v){
-        System.out.println("访问:"+adjlist[v].vertex);
+        System.out.println("访问:"+adjlist[v].text);
         visited[v]=true;
         int front=-1,rear=-1;
         int[]Q=new int[vertexNum];
         Q[++rear]=v;
         while (front!=rear){
             v=Q[++front];
-            ArcNode pNode=adjlist[v].firstedge;
+            ArcNode pNode=adjlist[v].firstArcNode;
             while (pNode!=null){
                 int adjvex=pNode.adjvex;
                 if (!visited[adjvex]){
-                    System.out.println("访问:"+adjlist[adjvex].vertex);
+                    System.out.println("访问:"+adjlist[adjvex].text);
                     visited[adjvex]=true;
                     Q[++rear]=adjvex;
                 }
