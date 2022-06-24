@@ -66,6 +66,32 @@ public class ALGraph0623 {
             pNode=pNode.next;
         }
     }
+    public void DFSTraverse1(int v){
+        int []stack=new int[vertexNum];
+        for (int i=0;i<=vertexNum-1;i++)
+            stack[i]=-1;
+        int top=-1;
+        System.out.println("访问:"+adjlist[v].vertex);
+        visited[v]=true;
+        stack[++top]=v;
+        while (top!=-1){
+            v=stack[top];
+            ArcNode pNode=adjlist[v].firstedge;
+            while (pNode!=null){
+                int vex=pNode.adjvex;
+                if (!visited[vex]){
+                    System.out.println("访问:"+adjlist[vex].vertex);
+                    visited[vex]=true;
+                    stack[++top]=vex;
+                    break;
+                }
+                pNode=pNode.next;
+            }
+            if(pNode==null){
+                top--;
+            }
+        }
+    }
 
     /**
 
@@ -116,7 +142,8 @@ public class ALGraph0623 {
         arcArray[6]="3#0";
         arcArray[7]="3#1";
         ALGraph0623 graph=new ALGraph0623(vertexNodes,arcArray);
-        graph.DFSTraverse(0);
+//        graph.DFSTraverse(0);
+        graph.DFSTraverse1(0);
 //        graph.BFSTraverse(0);
     }
 }
