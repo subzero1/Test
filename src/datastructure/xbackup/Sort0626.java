@@ -2,7 +2,7 @@ package datastructure.xbackup;
 
 import java.util.Arrays;
 
-public class Sort0625 {
+public class Sort0626 {
     //Binsearch non-recursion
     public static int halfSort1(int r[], int left, int right, int key) {
         int center = -1;
@@ -99,14 +99,15 @@ public class Sort0625 {
         }
     }
 
+
     //Heap Sort
     public static void heap(int r[], int n) {
         for (int i = n / 2 - 1; i >= 0; i--)
             heap_x(r, i, n);
         for (int i = 0; i <= n - 2; i++) {
-            r[0] = r[0] ^ r[n - 1 - i];
-            r[n - 1 - i] = r[0] ^ r[n - 1 - i];
-            r[0] = r[0] ^ r[n - 1 - i];
+            r[0] = r[0] ^ r[n - i - 1];
+            r[n - i - 1] = r[0] ^ r[n - i - 1];
+            r[0] = r[0] ^ r[n - i - 1];
             heap_x(r, 0, n - 1 - i);
         }
     }
@@ -129,9 +130,9 @@ public class Sort0625 {
 
     public static int[] mSort(int[] r, int l, int h) {
         if (l == h) return new int[]{r[l]};
-        int center = (l + h) / 2;
-        int[] left = mSort(r, l, center);
-        int[] right = mSort(r, center + 1, h);
+        int mid = (l + h) / 2;
+        int[] left = mSort(r, l, mid);
+        int[] right = mSort(r, mid + 1, h);
         int[] resultArray = new int[left.length + right.length];
         int i = 0, j = 0, k = 0;
         while (i < left.length && j < right.length)
@@ -157,9 +158,9 @@ public class Sort0625 {
 //                shell(r,n);
 //                bubble(r,n);
 //                quick(r,0,n-1);
-//                select(r,n);
-        heap(r, n);
-        int s[] = mSort(r, 0, n - 1);
+//        select(r, n);
+//        heap(r, n);
+        int s[]=mSort(r,0,n-1);
         System.out.println(Arrays.toString(s));
 //        System.out.println(Arrays.toString(r));
     }

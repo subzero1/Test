@@ -10,9 +10,9 @@ public class MGraph0625 {
     private int arcNum;
     private boolean[] visited;
 
-    public MGraph0625(){
-        this(new VertexNode[]{new VertexNode("顶点0"),new VertexNode("顶点1"),new VertexNode("顶点2"),new VertexNode("顶点3"),new VertexNode("顶点4")}, new String[]{"0#1","0#3","1#2","1#3","2#4"});
-    }
+//    public MGraph0625(){
+//        this(new VertexNode[]{new VertexNode("顶点0"),new VertexNode("顶点1"),new VertexNode("顶点2"),new VertexNode("顶点3"),new VertexNode("顶点4")}, new String[]{"0#1","0#3","1#2","1#3","2#4"});
+//    }
 
     /**
      * @param vertexArray 顶点信息数组

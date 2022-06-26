@@ -33,6 +33,8 @@ public class ALGraph0625 {
             String[]a=arcs.split("#");
             int v0=Integer.valueOf(a[0]);
             int v1=Integer.valueOf(a[1]);
+
+
             ArcNode arcNode=adjlist[v0].firstArcNode;
             if (arcNode==null)
                 adjlist[v0].firstArcNode=new ArcNode(v1);

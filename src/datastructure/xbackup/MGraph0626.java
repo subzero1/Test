@@ -1,8 +1,8 @@
-package datastructure.template;
+package datastructure.xbackup;
 
 import Bean.VertexNode;
 
-public class MGraph {
+public class MGraph0626 {
     private VertexNode[] vertex;//顶点
     private int[][] arc;//邻接矩阵（弧）
 
@@ -18,7 +18,7 @@ public class MGraph {
      * @param vertexArray 顶点信息数组
      * @param arcArray 边原始数组（格式，初度顶点编号#入度顶点编号）
      */
-    public MGraph(VertexNode[] vertexArray, String[] arcArray) {
+    public MGraph0626(VertexNode[] vertexArray, String[] arcArray) {
         this.arcNum=arcArray.length;
         this.vertexNum=vertexArray.length;
 
@@ -48,21 +48,43 @@ public class MGraph {
 
     /**
      * Depth first traverse recursion
-    System.out.println("访问:"+vertex[v].text);
-    visited[v]=true;
+     System.out.println("访问:"+vertex[v].text);
+     visited[v]=true;
      * @param v
      */
     public void DFSTraverse(int v){
-
+        System.out.println("访问:"+vertex[v].text);
+        visited[v]=true;
+        for (int i=0;i<=vertexNum-1;i++)
+            if (arc[v][i]==1&!visited[i])
+                DFSTraverse(i);
     }
 
     /**
      * Depth first traverse no-recursion
-    System.out.println("访问:"+vertex[v].text);
-    visited[v]=true;
+     System.out.println("访问:"+vertex[v].text);
+     visited[v]=true;
      * @param v
      */
     public void DFSTraverse1(int v){
+        int top=-1;
+        int[]stack=new int[vertexNum];
+        System.out.println("访问:"+vertex[v].text);
+        visited[v]=true;
+        stack[++top]=v;
+        while (top!=-1){
+            v=stack[top];
+            int i=0;
+            for (;i<=vertexNum-1;i++)
+                if (arc[v][i]==1&&!visited[i]){
+                    System.out.println("访问:"+vertex[i].text);
+                    visited[i]=true;
+                    stack[++top]=i;
+                    break;
+                }
+            if (i==vertexNum)
+                top--;
+        }
     }
 
     /**
@@ -72,7 +94,21 @@ public class MGraph {
     visited[v]=true;
      */
     public void BFSTraverse(int v){
-
+        int front=-1,rear=-1;
+        int[]Q=new int[vertexNum];
+        System.out.println("访问:"+vertex[v].text);
+        visited[v]=true;
+        Q[++rear]=v;
+        while (front!=rear){
+            v=Q[++front];
+            for (int i=0;i<=vertexNum-1;i++){
+                if (arc[v][i]==1&&!visited[i]){
+                    System.out.println("访问:"+vertex[i].text);
+                    visited[i]=true;
+                    Q[++rear]=i;
+                }
+            }
+        }
     }
 
     /**
@@ -93,9 +129,9 @@ public class MGraph {
         arcArray[2]="1#2";
         arcArray[3]="1#3";
         arcArray[4]="2#4";
-        MGraph graph=new MGraph(entries,arcArray);
-        graph.DFSTraverse(0);
+        MGraph0626 graph=new MGraph0626(entries,arcArray);
+//        graph.DFSTraverse(0);
 //        graph.DFSTraverse1(0);
-//        graph.BFSTraverse(0);
+        graph.BFSTraverse(0);
     }
 }
