@@ -2,7 +2,7 @@ package datastructure.xbackup;
 
 import Bean.VertexNode;
 
-public class MGraph0626 {
+public class MGraph0701 {
     private VertexNode[] vertex;//顶点
     private int[][] arc;//邻接矩阵（弧）
 
@@ -10,12 +10,15 @@ public class MGraph0626 {
     private int arcNum;
     private boolean[] visited;
 
+//    public MGraph0625(){
+//        this(new VertexNode[]{new VertexNode("顶点0"),new VertexNode("顶点1"),new VertexNode("顶点2"),new VertexNode("顶点3"),new VertexNode("顶点4")}, new String[]{"0#1","0#3","1#2","1#3","2#4"});
+//    }
 
     /**
      * @param vertexArray 顶点信息数组
      * @param arcArray 边原始数组（格式，初度顶点编号#入度顶点编号）
      */
-    public MGraph0626(VertexNode[] vertexArray, String[] arcArray) {
+    public MGraph0701(VertexNode[] vertexArray, String[] arcArray) {
         this.arcNum=arcArray.length;
         this.vertexNum=vertexArray.length;
 
@@ -53,7 +56,7 @@ public class MGraph0626 {
         System.out.println("访问:"+vertex[v].text);
         visited[v]=true;
         for (int i=0;i<=vertexNum-1;i++)
-            if (arc[v][i]==1&!visited[i])
+            if (arc[v][i]==1&&!visited[i])
                 DFSTraverse(i);
     }
 
@@ -65,7 +68,7 @@ public class MGraph0626 {
      */
     public void DFSTraverse1(int v){
         int top=-1;
-        int[]stack=new int[vertexNum];
+        int []stack=new int[vertexNum];
         System.out.println("访问:"+vertex[v].text);
         visited[v]=true;
         stack[++top]=v;
@@ -91,20 +94,19 @@ public class MGraph0626 {
     visited[v]=true;
      */
     public void BFSTraverse(int v){
-        int front=-1,rear=-1;
+        int rear=-1,front=-1;
         int[]Q=new int[vertexNum];
         System.out.println("访问:"+vertex[v].text);
         visited[v]=true;
         Q[++rear]=v;
         while (front!=rear){
             v=Q[++front];
-            for (int i=0;i<=vertexNum-1;i++){
+            for (int i=0;i<=vertexNum-1;i++)
                 if (arc[v][i]==1&&!visited[i]){
                     System.out.println("访问:"+vertex[i].text);
                     visited[i]=true;
                     Q[++rear]=i;
                 }
-            }
         }
     }
 
@@ -126,7 +128,7 @@ public class MGraph0626 {
         arcArray[2]="1#2";
         arcArray[3]="1#3";
         arcArray[4]="2#4";
-        MGraph0626 graph=new MGraph0626(entries,arcArray);
+        MGraph0701 graph=new MGraph0701(entries,arcArray);
 //        graph.DFSTraverse(0);
 //        graph.DFSTraverse1(0);
         graph.BFSTraverse(0);
