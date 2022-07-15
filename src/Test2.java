@@ -1,9 +1,9 @@
 public class Test2 {
     private double isTree=33d;
 
-//    public boolean isTree() {
-//        return isTree;
-//    }
+    public double isTree() {
+        return isTree;
+    }
 
     public void setTree(double tree) {
         isTree = tree;

@@ -1,9 +1,9 @@
-package datastructure.template;;
+package datastructure.xbackup;;
 
 import Bean.ArcNode;
 import Bean.VertexNode;
 
-public class ALGraph {
+public class ALGraph0715 {
     VertexNode[]adjlist;
 
     int vertexNum;
@@ -16,7 +16,7 @@ public class ALGraph {
      * @param vertexArray 顶点信息数组
      * @param arcArray 边原始数组（格式，初度顶点编号#入度顶点编号）
      */
-    public ALGraph(VertexNode[] vertexArray, String[] arcArray) {
+    public ALGraph0715(VertexNode[] vertexArray, String[] arcArray) {
         this.vertexNum=vertexArray.length;
         this.arcNum=arcArray.length;
         adjlist=new VertexNode[vertexNum];
@@ -56,14 +56,42 @@ public class ALGraph {
      * @param v
      */
     public void DFSTraverse(int v){
-
+        System.out.println("访问:"+adjlist[v].text);
+        visited[v]=true;
+        ArcNode pNode=adjlist[v].firstArcNode;
+        while (pNode!=null){
+            int vex=pNode.adjvex;
+            if (!visited[vex])
+                DFSTraverse(vex);
+            pNode=pNode.next;
+        }
     }
     /**
      * Depth first traverse non-recursion
      * @param v
      */
     public void DFSTraverse1(int v){
-
+        int top=-1;
+        int[]stack=new int[vertexNum];
+        System.out.println("访问:"+adjlist[v].text);
+        visited[v]=true;
+        stack[++top]=v;
+        while (top!=-1){
+            v=stack[top];
+            ArcNode pNode=adjlist[v].firstArcNode;
+            while (pNode!=null){
+                int vex=pNode.adjvex;
+                if (!visited[vex]){
+                    System.out.println("访问:"+adjlist[vex].text);
+                    visited[vex]=true;
+                    stack[++top]=vex;
+                    break;
+                }
+                pNode=pNode.next;
+            }
+            if (pNode==null)
+                top--;
+        }
     }
 
     /**
@@ -73,7 +101,24 @@ public class ALGraph {
      * @param v
      */
     public void BFSTraverse(int v){
-
+        int front=-1,rear=-1;
+        int[]Q=new int[vertexNum];
+        System.out.println("访问:"+adjlist[v].text);
+        visited[v]=true;
+        Q[++rear]=v;
+        while (front!=rear){
+            v=Q[++front];
+            ArcNode pNode=adjlist[v].firstArcNode;
+            while (pNode!=null){
+                int vex=pNode.adjvex;
+                if (!visited[vex]){
+                    System.out.println("访问:"+adjlist[vex].text);
+                    visited[vex]=true;
+                    Q[++rear]=vex;
+                }
+                pNode=pNode.next;
+            }
+        }
 
     }
 
@@ -100,9 +145,9 @@ public class ALGraph {
         arcArray[7]="3#0";
         arcArray[8]="3#1";
         arcArray[9]="4#2";
-        ALGraph  graph=new ALGraph(vertexNodes,arcArray);
-        graph.DFSTraverse(0);
+        ALGraph0715  graph=new ALGraph0715(vertexNodes,arcArray);
+//        graph.DFSTraverse(0);
 //        graph.DFSTraverse1(0);
-//        graph.BFSTraverse(0);
+        graph.BFSTraverse(0);
     }
 }
